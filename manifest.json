@@ -1,0 +1,25 @@
+{
+    "name": "AWS Console Color Changer",
+    "version": "1.0",
+    "manifest_version": 3,
+    "description": "AWS Console Color Changer",
+
+    "content_scripts": [
+      {
+        "matches": ["https://*.console.aws.amazon.com/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+
+    "action": {
+      "default_popup": "popup.html"
+    },
+
+    "permissions": ["storage", "tabs"],
+    "icons": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "64": "images/icon64.png",
+      "128": "images/icon128.png"
+    }
+}

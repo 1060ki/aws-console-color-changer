@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>AWS Color Changer</title>
+  <style>
+    body {
+      min-width: 400px;
+      padding: 1rem;
+    }
+    .account-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+    .delete-button {
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h5 class="mb-3">AWS Console Color Changer</h5>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <form id="accountForm">
+        <div class="mb-3">
+          <label for="accountIdInput" class="form-label">Account ID</label>
+          <input type="text" class="form-control" id="accountIdInput" placeholder="123456789012" />
+        </div>
+        <div class="mb-3">
+          <label for="colorInput" class="form-label">Color</label>
+          <input type="color" class="form-control form-control-color" id="colorInput" value="#ffffff" title="Choose color" />
+        </div>
+        <button type="submit" class="btn btn-primary w-100" id="addButton">Add / Update</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="list-group" id="accountList"></div>
+
+  <script type="module" src="src/assets/popup.js"></script>
+</body>
+</html>
