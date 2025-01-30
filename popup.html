@@ -30,10 +30,29 @@
           <label for="accountIdInput" class="form-label">Account ID</label>
           <input type="text" class="form-control" id="accountIdInput" placeholder="123456789012" />
         </div>
-        <div class="mb-3">
-          <label for="colorInput" class="form-label">Color</label>
-          <input type="color" class="form-control form-control-color" id="colorInput" value="#ffffff" title="Choose color" />
+        <div style="margin-top: 0.5em;">
+          <div class="row">
+            <div class="col-4">
+              <div class="row">
+                <div class="col-6">
+                  <label for="colorInput">Color:</label>
+                </div>
+                <div class="col-6">
+                  <input type="color" id="colorInput" value="#ffffff" />
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <div id="colorPalette" style="margin-top: 2px; display: flex; gap: 4px;">
+                <div class="color-box" data-color="#dc0000" style="width: 20px; height: 20px; background-color: #dc0000; cursor: pointer;"></div>
+                <div class="color-box" data-color="#8456ce" style="width: 20px; height: 20px; background-color: #8456ce; cursor: pointer;"></div>
+                <div class="color-box" data-color="#096f64" style="width: 20px; height: 20px; background-color: #096f64; cursor: pointer;"></div>
+                <div class="color-box" data-color="#e07941" style="width: 20px; height: 20px; background-color: #e07941; cursor: pointer;"></div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <button type="submit" class="btn btn-primary w-100" id="addButton">Add / Update</button>
       </form>
     </div>

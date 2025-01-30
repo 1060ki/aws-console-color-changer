@@ -7,10 +7,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const addButton = document.getElementById("addButton");
   const accountList = document.getElementById("accountList");
 
+  const colorPalette = document.getElementById("colorPalette");
+
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs && tabs.length > 0) {
       const url = new URL(tabs[0].url);
-      if (url.hostname.includes("console.aws.amazon.com")) {
+      if (url.hostname.includes("console.aws.amazon.com") && /^\d/.test(url.hostname)) {
         const domainPart = url.hostname.split(".")[0];
         const [accId] = domainPart.split("-");
         accountIdInput.value = accId;
@@ -27,7 +29,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     accountList.innerHTML = "";
     for (const [accId, col] of Object.entries(accountColors)) {
       const li = document.createElement("li");
-      li.textContent = `${accId} : ${col}`;
+      const colorSpan = document.createElement("span");
+      const colorBox = document.createElement("span");
+
+      colorSpan.textContent = col;
+
+      colorBox.style.display = "inline-block";
+      colorBox.style.backgroundColor = col;
+      colorBox.style.width = "16px";
+      colorBox.style.height = "16px";
+      colorBox.style.borderRadius = "4px";
+      colorBox.style.marginRight = "4px";
+
+      colorSpan.style.cursor = "pointer";
+      colorBox.addEventListener("click", () => {
+        colorInput.value = col;
+      });
+
+      li.textContent = `${accId} : `;
+      li.appendChild(colorBox);
+      li.appendChild(colorSpan);
 
       const deleteBtn = document.createElement("span");
       deleteBtn.className = "delete-button";
@@ -59,5 +80,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderList();
     accountIdInput.value = "";
     colorInput.value = "#ffffff";
+  });
+
+  colorPalette.addEventListener("click", (e) => {
+    if (e.target.classList.contains("color-box")) {
+      colorInput.value = e.target.dataset.color;
+    }
   });
 });

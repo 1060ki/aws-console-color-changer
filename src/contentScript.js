@@ -1,6 +1,6 @@
 (async function() {
   const domain = window.location.hostname;
-  if (!domain.includes("console.aws.amazon.com")) {
+  if (!domain.includes("console.aws.amazon.com") || !/^\d/.test(domain)) {
     return;
   }
 
