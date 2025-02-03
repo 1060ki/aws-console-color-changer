@@ -12,10 +12,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs && tabs.length > 0) {
       const url = new URL(tabs[0].url);
-      if (url.hostname.includes("console.aws.amazon.com") && /^\d/.test(url.hostname)) {
+      if (url.hostname.includes("console.aws.amazon.com")) {
         const domainPart = url.hostname.split(".")[0];
-        const [accId] = domainPart.split("-");
-        accountIdInput.value = accId;
+        const warningEl = document.getElementById("multiSessionWarning");
+        // マルチセッション形式のチェック（数字-文字列の形式）
+        const isMultiSession = /^\d+-[a-zA-Z0-9]+$/.test(domainPart);
+
+        if (isMultiSession) {
+          const [accId] = domainPart.split("-");
+          accountIdInput.value = accId;
+
+          // 警告メッセージが表示されている場合は非表示にする
+          if (warningEl) warningEl.style.display = "none";
+        } else {
+          const warningEl = document.getElementById("multiSessionWarning");
+          warningEl.style.display = "block";
+        }
       }
     }
   });
